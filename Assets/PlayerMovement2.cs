@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement2 : MonoBehaviour
 {
     private float speed = 8f;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float JumpForce = 8f;
+
+    // Doble salto
+    private bool canDoubleJump;
 
     // Variables que utilizaremos para fijar límites
     [SerializeField] private float leftLimit;
     [SerializeField] private float rightLimit;
     [SerializeField] private float bottomLimit;
     [SerializeField] private float topLimit;
-   
-    // Double Jump
-    [SerializeField] private int nJumps = 1;
-    private int nJumpsValue;
 
     // Climb
     [SerializeField] private float climbSpeed;
@@ -31,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     {
         cCollider = GetComponent<CircleCollider2D>();
         initialGravity = rb.gravityScale;
+        canDoubleJump = true;
     }
     
     void FixedUpdate() // Estamos trabajando toqueteando físicas del Player, entonces usamos el Fixed Update
@@ -50,16 +50,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void DoubleJump() // Función para salto doble
     {
-        if (Input.GetKeyDown(KeyCode.Space) && nJumpsValue > 0)
+        if (PlayerJumpCollider.isGrounded) 
         {
+            canDoubleJump = true;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (PlayerJumpCollider.isGrounded)
+            {
             rb.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
-            nJumpsValue--;
+            }     
+            
+            else if (canDoubleJump) 
+            {
+                rb.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+                canDoubleJump = false;
+            }
         }
-
-        if (PlayerJumpCollider.isGrounded)
-        {
-            nJumpsValue = nJumps;
-        }
+     
     }
 
     private void Climb() // Función para escalar

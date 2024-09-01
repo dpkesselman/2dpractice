@@ -9,7 +9,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Stairs
@@ -42,15 +42,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Player
-    uniqueID: 3238172519
-    locked: 0
-  - name: Foreground
-    uniqueID: 3423446847
+  - name: Background
+    uniqueID: 376068943
     locked: 0
   - name: Stairs
     uniqueID: 1832368829
     locked: 0
-  - name: Background
-    uniqueID: 376068943
+  - name: Foreground
+    uniqueID: 3423446847
+    locked: 0
+  - name: Player
+    uniqueID: 3238172519
     locked: 0
