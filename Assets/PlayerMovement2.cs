@@ -42,11 +42,25 @@ public class PlayerMovement2 : MonoBehaviour
         
         rb.transform.position = new Vector3(Mathf.Clamp(transform.position.x, leftLimit, rightLimit), Mathf.Clamp(transform.position.y, bottomLimit, topLimit), transform.position.z); // Delimita los movimientos del player en la escecna
 
+
+        // Flip
+        if (h > 0)
+        {
+            rb.transform.localScale = new Vector3(5,5,1);
+        }
+
+        if (h < 0)
+        {
+            rb.transform.localScale = new Vector3(-5,5,1);
+        }
+        
+        
         DoubleJump();
         
         Climb();
         
     }
+
 
     private void DoubleJump() // Función para salto doble
     {
