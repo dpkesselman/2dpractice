@@ -25,12 +25,16 @@ public class PlayerMovement2 : MonoBehaviour
     float v;
     float initialGravity;
 
+    //Animation
+    private Animator animator;
+
 
     void Start()
     {
         cCollider = GetComponent<CircleCollider2D>();
         initialGravity = rb.gravityScale;
         canDoubleJump = true;
+        animator = GetComponent<Animator>();
     }
     
     void FixedUpdate() // Estamos trabajando toqueteando físicas del Player, entonces usamos el Fixed Update
@@ -54,6 +58,8 @@ public class PlayerMovement2 : MonoBehaviour
             rb.transform.localScale = new Vector3(-5,5,1);
         }
         
+        //Animación caminar
+        animator.SetFloat("floatX", Mathf.Abs(h)); //Mathf.Abs nos va ayudar a conseguir siempre valores positivos y tener mejor control de la animación
         
         DoubleJump();
         
@@ -64,6 +70,9 @@ public class PlayerMovement2 : MonoBehaviour
 
     private void DoubleJump() // Función para salto doble
     {
+        //animator.SetBool("isGrounded", PlayerJumpCollider.isGrounded);
+        animator.SetFloat("velocityY", rb.velocity.y);
+        
         if (PlayerJumpCollider.isGrounded) 
         {
             canDoubleJump = true;
