@@ -104,6 +104,9 @@ public class PlayerMovement2 : MonoBehaviour
             rb.velocity = rateOfClimb;
             rb.gravityScale = 0;
             isClimbing = true;
+            animator.SetBool("isClimbing", isClimbing);
+            animator.SetFloat("velocityY", rb.velocity.y);
+            
         }
         else
         {
