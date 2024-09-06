@@ -70,12 +70,13 @@ public class PlayerMovement2 : MonoBehaviour
 
     private void DoubleJump() // Función para salto doble
     {
-        //animator.SetBool("isGrounded", PlayerJumpCollider.isGrounded);
+        animator.SetBool("isGrounded", PlayerJumpCollider.isGrounded);
         animator.SetFloat("velocityY", rb.velocity.y);
-        
+               
         if (PlayerJumpCollider.isGrounded) 
         {
             canDoubleJump = true;
+  
         }
         
         if (Input.GetKeyDown(KeyCode.Space))
