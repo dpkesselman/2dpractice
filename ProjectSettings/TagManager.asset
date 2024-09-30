@@ -8,6 +8,7 @@ TagManager:
   - Stairs
   - SceneChanger
   - Sound
+  - Points
   layers:
   - Default
   - TransparentFX
