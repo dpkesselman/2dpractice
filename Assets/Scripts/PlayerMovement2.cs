@@ -32,6 +32,9 @@ public class PlayerMovement2 : MonoBehaviour
     //Llamar al sound manager
     SoundManager soundManager;
 
+    //Trail
+    [SerializeField] private GameObject trail;
+
     void Awake()
     {
         soundManager = GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundManager>();
@@ -85,7 +88,7 @@ public class PlayerMovement2 : MonoBehaviour
         if (PlayerJumpCollider.isGrounded) 
         {
             canDoubleJump = true;
-  
+            trail.SetActive(false);
         }
         
         if (Input.GetKeyDown(KeyCode.Space))
@@ -100,6 +103,7 @@ public class PlayerMovement2 : MonoBehaviour
             {
                 rb.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
                 soundManager.PlaySFX(soundManager.jump);
+                trail.SetActive(true);
                 canDoubleJump = false;
             }
         }
@@ -139,3 +143,4 @@ public class PlayerMovement2 : MonoBehaviour
         }
     }
 }
+
