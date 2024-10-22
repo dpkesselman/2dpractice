@@ -10,11 +10,6 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float projectileCount;
     private PlayerMovement2 playerMovement;
     private bool facingRight;
-
-    void Awake()
-    {
-        
-    }
     
     void Start()
     {
