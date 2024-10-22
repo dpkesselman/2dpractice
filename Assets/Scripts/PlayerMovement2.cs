@@ -35,6 +35,11 @@ public class PlayerMovement2 : MonoBehaviour
     //Trail
     [SerializeField] private GameObject trail;
 
+    //Flip
+    private bool flippedLeft;
+    public bool facingRight;
+
+
     void Awake()
     {
         soundManager = GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundManager>();
@@ -47,6 +52,7 @@ public class PlayerMovement2 : MonoBehaviour
         initialGravity = rb.gravityScale;
         canDoubleJump = true;
         animator = GetComponent<Animator>();
+        facingRight = true;
     }
     
     void FixedUpdate() // Estamos trabajando toqueteando físicas del Player, entonces usamos el Fixed Update
@@ -62,12 +68,14 @@ public class PlayerMovement2 : MonoBehaviour
         // Flip
         if (h > 0)
         {
-            rb.transform.localScale = new Vector3(5,5,1);
+            facingRight = true;
+            Flip(true);
         }
 
         if (h < 0)
         {
-            rb.transform.localScale = new Vector3(-5,5,1);
+            facingRight = false;
+            Flip(false);
         }
         
         //Animación caminar
@@ -79,6 +87,19 @@ public class PlayerMovement2 : MonoBehaviour
         
     }
 
+    void Flip(bool facingRight)
+    {
+        if(flippedLeft && facingRight)
+        {
+            rb.transform.localScale = new Vector3(5,5,1);
+            flippedLeft = false;
+        }
+        if(!flippedLeft && !facingRight)
+        {
+            rb.transform.localScale = new Vector3(-5,5,1);
+            flippedLeft = true;
+        }
+    }
 
     private void DoubleJump() // Función para salto doble
     {

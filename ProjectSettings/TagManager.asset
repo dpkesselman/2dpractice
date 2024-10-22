@@ -9,6 +9,8 @@ TagManager:
   - SceneChanger
   - Sound
   - Points
+  - Enemy Weak Point
+  - Enemy
   layers:
   - Default
   - TransparentFX
